@@ -69,12 +69,12 @@ def generate_frames():
 def detect_objects(frame):
     result = model(frame)[0]
     detections = sv.Detections.from_yolov8(result)
-    detections = detections[detections.class_id == 1]
+    detections = detections[detections.class_id == 1] # (detections.class_id == 1) for detecting parked space & (detections.class_id == 0) for empty space detection
     return detections
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html') # Your main HTML file for example index.html
 
 @app.route('/video_feed')
 def video_feed():
