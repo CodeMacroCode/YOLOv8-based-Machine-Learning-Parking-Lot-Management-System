@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Machine Learning Models</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+</head>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(to right bottom, #7F7FD5, #86A8E7, #91EAE4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.container {
+    max-width: 800px; /* Adjust the container width as needed */
+    padding: 30px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+/* .button {
+    margin-bottom: 15px;
+    width: 100%;
+} */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (9 / 16 * 100 = 56.25) */
+    overflow: hidden;
+}
+.video-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.detection-results {
+    margin-top: 30px;
+    text-align: center;
+    color: #333;
+}
+.debug-info {
+    margin-top: 15px;
+    text-align: center;
+    color: #777;
+}
+</style>
+
+<body>
+    <div class="container">
+        <h1>Machine Learning Models</h1>
+        <div class="video-container">
+            <img id="video-stream" src="{{ url_for('video_feed') }}" alt="Video Stream">
+        </div>
+        <!-- <div class="text-center">
+            <button class="btn btn-primary button" onclick="runModel1()"><i class="fas fa-play"></i> Run Model</button>
+        </div> -->
+        <div class="detection-results">
+            <h3>Detection Results:</h3>
+            <p>{{ detection_results }}</p>
+        </div>
+        <div class="debug-info">
+            <h4>Debug Information:</h4>
+            <p>{{ debug_info }}</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        function runModel1() {
+            fetch('/run-python')
+                .then(response => response.text())
+                .then(result => {
+                    console.log(result);
+                    // Handle the result or update the HTML page accordingly
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
